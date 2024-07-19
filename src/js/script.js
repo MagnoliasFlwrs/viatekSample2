@@ -13,14 +13,14 @@ const hideMenuModal = () => {
     overlay.classList.remove('open');
     menuModal.classList.remove('active');
 }
-burgerBtn?.addEventListener('click' , ()=> {
+burgerBtn?.addEventListener('click', () => {
     showMenuModal()
 })
 
-closeMenuBtn?.addEventListener('click' , ()=> {
+closeMenuBtn?.addEventListener('click', () => {
     hideMenuModal()
 })
-overlay?.addEventListener('click' , ()=> {
+overlay?.addEventListener('click', () => {
     hideMenuModal()
 })
 
@@ -32,7 +32,7 @@ const phoneSelectWraps = document.querySelectorAll('.phone-select');
 
 phoneSelectWraps?.forEach(phoneSelectWrap => {
     const phoneSelect = phoneSelectWrap.querySelector('.header-phones');
-    phoneSelect.addEventListener('click' , (e)=> {
+    phoneSelect.addEventListener('click', (e) => {
         e.stopPropagation()
         let currentSelectWrap = e.target.closest('.phone-select');
         let currentSelectBody = currentSelectWrap.querySelector('.phone-select-wrapper');
@@ -40,11 +40,11 @@ phoneSelectWraps?.forEach(phoneSelectWrap => {
         phoneSelect.classList.toggle('active');
         currentSelectWrap.classList.toggle('active');
     })
-    document.addEventListener('click', (e)=> {
+    document.addEventListener('click', (e) => {
         let lists = document.querySelectorAll('.phone-select-wrapper.active')
 
-        if (!e.target.closest('.phone-select') && lists){
-            lists.forEach(el=> {
+        if (!e.target.closest('.phone-select') && lists) {
+            lists.forEach(el => {
                 el.classList.remove('active');
                 let currentSelectWrap = el.closest('.phone-select');
                 let currentSelectPhoneSelect = currentSelectWrap.querySelector('.header-phones');
@@ -264,26 +264,26 @@ if (textSwiper && pictureSwiper) {
 
 // custom select
 
-const servicesSelect =  document.querySelector('.services');
+const servicesSelect = document.querySelector('.services');
 const servicesOptions = document.querySelectorAll('.services-list li');
 const servicesSelectBody = document.querySelector('.services-list');
 
 
 if (servicesSelect) {
-    servicesSelect.addEventListener('click' , () => {
+    servicesSelect.addEventListener('click', () => {
         servicesSelectBody.classList.add('active');
     })
-    servicesSelect.querySelector('p').addEventListener('click' , () => {
+    servicesSelect.querySelector('p').addEventListener('click', () => {
         servicesSelectBody.classList.add('active');
     })
     servicesOptions.forEach(el => {
-        el.addEventListener('click' , ()=> {
+        el.addEventListener('click', () => {
             servicesSelect.querySelector('p').innerHTML = el.innerHTML;
             servicesSelect.dataset.current = el.dataset.value;
             servicesSelectBody.classList.remove('active')
         })
     })
-    document.addEventListener('click' , (e)=> {
+    document.addEventListener('click', (e) => {
         if ((!e.target.closest('.services-wrap')) && servicesSelectBody.classList.contains('active')) {
             servicesSelectBody.classList.remove('active');
         }
@@ -298,13 +298,13 @@ const showModal = (modal) => {
     modal.classList.add('active');
 }
 const closeModal = (modal) => {
-    overlay.addEventListener('click' , () => {
+    overlay.addEventListener('click', () => {
         overlay.classList.remove('open');
         modal.classList.remove('active');
     })
-    const closeBtns =  modal.querySelectorAll('.close-btn');
+    const closeBtns = modal.querySelectorAll('.close-btn');
     closeBtns?.forEach(closeBtn => {
-        closeBtn.addEventListener('click' , () => {
+        closeBtn.addEventListener('click', () => {
             overlay.classList.remove('open');
             modal.classList.remove('active');
         })
@@ -317,28 +317,28 @@ const contactsModal = document.querySelector('.contacts-modal');
 const priceModal = document.querySelector('.price-modal');
 const aboutModal = document.querySelector('.about-modal');
 
-const showContactsModalBtns =  document.querySelectorAll('.show-contacts-modal');
-const showPriceModalBtns =  document.querySelectorAll('.show-price-modal');
-const showAboutModalBtns =  document.querySelectorAll('.show-about-modal');
+const showContactsModalBtns = document.querySelectorAll('.show-contacts-modal');
+const showPriceModalBtns = document.querySelectorAll('.show-price-modal');
+const showAboutModalBtns = document.querySelectorAll('.show-about-modal');
 
 
 
-showContactsModalBtns?.forEach(el=> {
-    el.addEventListener('click' , (e) => {
+showContactsModalBtns?.forEach(el => {
+    el.addEventListener('click', (e) => {
         e.preventDefault();
         showModal(contactsModal);
         closeModal(contactsModal);
     })
 })
-showPriceModalBtns?.forEach(el=> {
-    el.addEventListener('click' , (e) => {
+showPriceModalBtns?.forEach(el => {
+    el.addEventListener('click', (e) => {
         e.preventDefault();
         showModal(priceModal);
         closeModal(priceModal);
     })
 })
-showAboutModalBtns?.forEach(el=> {
-    el.addEventListener('click' , (e) => {
+showAboutModalBtns?.forEach(el => {
+    el.addEventListener('click', (e) => {
         e.preventDefault();
         showModal(aboutModal);
         closeModal(aboutModal);
@@ -399,3 +399,100 @@ function boxHandler(e) {
         currentContent.style.maxHeight = 0;
     }
 }
+
+// swiper
+let advocate_slider = new Swiper(".advocate-slider", {
+    pagination: {
+        el: ".advocate-slider-pagination",
+        type: "fraction",
+    },
+    navigation: {
+        nextEl: ".advocate-slider-button-next",
+        prevEl: ".advocate-slider-button-prev",
+    },
+});
+
+const img_block = document.querySelectorAll('.img_block');
+img_block.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        let img = el.querySelector('img');
+        let title = el.querySelector('.content_block h2');
+        let svg = el.querySelector('svg');
+        svg.classList.add('svg_activator')
+        let text = el.querySelector('.content_block p');
+        text.classList.add('content_block_text_activator')
+        title.classList.add('activator_for_title');
+        img.classList.add('activator_for_img');
+    })
+    el.addEventListener('mouseleave', () => {
+        let img = el.querySelector('img');
+        let svg = el.querySelector('svg');
+        svg.classList.remove('svg_activator')
+        let title = el.querySelector('.content_block h2');
+        let text = el.querySelector('.content_block p');
+        text.classList.remove('content_block_text_activator')
+        title.classList.remove('activator_for_title');
+        img.classList.remove('activator_for_img')
+    })
+})
+
+window.addEventListener("DOMContentLoaded", function () {
+    [].forEach.call(document.querySelectorAll('.form_block .phone'), function (input) {
+        var keyCode;
+        function mask(event) {
+            event.keyCode && (keyCode = event.keyCode);
+            var pos = this.selectionStart;
+            if (pos < 3) event.preventDefault();
+            var matrix = "+7 (___) ___ ____",
+                i = 0,
+                def = matrix.replace(/\D/g, ""),
+                val = this.value.replace(/\D/g, ""),
+                new_value = matrix.replace(/[_\d]/g, function (a) {
+                    return i < val.length ? val.charAt(i++) : a
+                });
+            i = new_value.indexOf("_");
+            if (i != -1) {
+                i < 5 && (i = 3);
+                new_value = new_value.slice(0, i)
+            }
+            var reg = matrix.substr(0, this.value.length).replace(/_+/g,
+                function (a) {
+                    return "\\d{1," + a.length + "}"
+                }).replace(/[+()]/g, "\\$&");
+            reg = new RegExp("^" + reg + "$");
+            if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) {
+                this.value = new_value;
+            }
+            if (event.type == "blur" && this.value.length < 5) {
+                this.value = "";
+            }
+        }
+
+        input.addEventListener("input", mask, false);
+        input.addEventListener("focus", mask, false);
+        input.addEventListener("blur", mask, false);
+        input.addEventListener("keydown", mask, false);
+
+    });
+
+}); 
+
+const footer_menu_block_container = document.querySelectorAll('.footer_menu_block-container');
+footer_menu_block_container.forEach(el=>{
+    el.addEventListener('mouseenter', () => {
+        let text = el.querySelector('p');
+        text.classList.add('text-active');
+        let img_container = el.querySelector('.img_container');
+        img_container.classList.add('actv')
+        const blacker_blur = el.querySelector('.blacker_blur');
+        blacker_blur.classList.add('active_blur')
+    })
+    el.addEventListener('mouseleave', () => {
+        let text = el.querySelector('p');
+        text.classList.remove('text-active');
+        let img_container = el.querySelector('.img_container');
+        img_container.classList.remove('actv');
+        const blacker_blur = el.querySelector('.blacker_blur');
+        blacker_blur.classList.remove('active_blur')
+    })
+})
